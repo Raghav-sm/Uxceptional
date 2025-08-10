@@ -1,6 +1,7 @@
 # Ignore node_modules and .env in backend and frontend folders
 /backend/node_modules/
 /backend/.env
+/backend/apps
 /frontend/node_modules/
 /frontend/.env
 
