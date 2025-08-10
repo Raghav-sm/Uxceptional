@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kid's Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .display {
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.5em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        .operator {
+            background-color: #f44336;
+        }
+
+        .operator:hover {
+            background-color: #d32f2f;
+        }
+
+        .equal {
+            background-color: #2196F3;
+            grid-column: span 2;
+        }
+
+        .equal:hover {
+            background-color: #1976D2;
+        }
+
+        .clear {
+            background-color: #ff9800;
+        }
+
+        .clear:hover {
+            background-color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="display">0</div>
+        <div class="buttons">
+            <button class="clear">C</button>
+            <button>/</button>
+            <button>*</button>
+            <button>-</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>.</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button class="equal">=</button>
+        </div>
+    </div>
+
+    <script>
+      const display = document.querySelector('.display');
+      const buttons = document.querySelector('.buttons');
+
+      let currentInput = '0';
+      let operator = null;
+      let firstOperand = null;
+
+      function updateDisplay() {
+        display.textContent = currentInput;
+      }
+
+      function handleNumber(number) {
+        if (currentInput === '0') {
+          currentInput = number;
+        } else {
+          currentInput += number;
+        }
+        updateDisplay();
+      }
+
+      function handleOperator(op) {
+        if (firstOperand === null) {
+          firstOperand = parseFloat(currentInput);
+        } else if (operator) {
+          calculate();
+        }
+        operator = op;
+        currentInput = '0';
+      }
+
+      function calculate() {
+        const secondOperand = parseFloat(currentInput);
+        switch (operator) {
+          case '+':
+            currentInput = (firstOperand + secondOperand).toString();
+            break;
+          case '-':
+            currentInput = (firstOperand - secondOperand).toString();
+            break;
+          case '*':
+            currentInput = (firstOperand * secondOperand).toString();
+            break;
+          case '/':
+            if (secondOperand === 0) {
+              currentInput = 'Error';
+            } else {
+              currentInput = (firstOperand / secondOperand).toString();
+            }
+            break;
+        }
+        operator = null;
+        firstOperand = null;
+        updateDisplay();
+      }
+
+      function handleClear() {
+        currentInput = '0';
+        operator = null;
+        firstOperand = null;
+        updateDisplay();
+      }
+
+      buttons.addEventListener('click', (event) => {
+        const target = event.target;
+
+        if (target.tagName === 'BUTTON') {
+          const value = target.textContent;
+
+          if (!isNaN(value) || value === '.') {
+            handleNumber(value);
+          } else if (value === '+' || value === '-' || value === '*' || value === '/') {
+            handleOperator(value);
+          } else if (value === '=') {
+            calculate();
+          } else if (value === 'C') {
+            handleClear();
+          }
+        }
+      });
+
+      updateDisplay();
+    </script>
+
+</body>
+</html>
