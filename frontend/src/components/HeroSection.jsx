@@ -1,26 +1,13 @@
-import React from "react";
-
-export const HeroSection = () => {
+export default function HeroSection() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-purple-50 to-white">
-      <div className="max-w-6xl mx-auto text-center">
-        <div className="inline-block mb-10 mt-20">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            <span className="bg-purple-700 text-white px-2 py-1 rounded-lg">
-              UX
-            </span>
-            <span className="text-purple-700">ceptional</span>
-          </h1>
-        </div>
-
-        <p className="text-xl md:text-2xl text-purple-600 max-w-3xl mx-auto mb-10">
-          Ideate. Sketch. Refine. The AI way to {""}
-          <span className="bg-purple-700 text-white  px-2 py-1 rounded-lg">
-            UX
-          </span>
-          ceptional design.
-        </p>
-      </div>
-    </section>
+    <div className="text-center mb-12">
+      <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+        UXceptional
+      </h2>
+      <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+        Describe your vision and watch as we craft beautiful, responsive
+        interfaces that bring your ideas to life.
+      </p>
+    </div>
   );
-};
+}
